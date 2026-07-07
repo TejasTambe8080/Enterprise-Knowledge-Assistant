@@ -1,7 +1,13 @@
 services:
   - type: web
     name: rag-backend
-    env: docker
+    runtime: python
+    pythonVersion: "3.11"
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r backend/requirements.txt
+      cd frontend && npm install && npm run build
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GEMINI_API_KEY
         sync: false
@@ -9,5 +15,7 @@ services:
         generateValue: true
       - key: DATABASE_URL
         value: sqlite:///./rag.db
+      - key: DEBUG
+        value: "False"
     healthCheckPath: /api/health
     autoDeploy: true
