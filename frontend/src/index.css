@@ -1,0 +1,60 @@
+html, body, #root {
+  * { box-sizing: border-box; }
+
+  html, body, #root {
+    margin: 0;
+    min-height: 100%;
+    font-family: Inter, Arial, sans-serif;
+    background: linear-gradient(135deg, #f4f7fb 0%, #e8eef8 100%);
+  }
+
+  button, input {
+    font: inherit;
+  }
+
+  .auth-shell,
+  .chat-shell,
+  .upload-shell {
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .auth-card,
+  .upload-box,
+  .chat-bubble,
+  .chat-input-shell,
+  .chat-header,
+  .empty-state,
+  .typing-indicator {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .auth-card {
+    max-width: 420px;
+    margin: 10vh auto 0;
+    padding: 28px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .auth-card input,
+  .chat-input-shell input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d8e1ee;
+    border-radius: 12px;
+  }
+
+  .chat-shell { display: grid; gap: 16px; }
+  .chat-header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .chat-main { display: grid; gap: 12px; max-width: 920px; margin: 0 auto; width: 100%; }
+  .chat-bubble { padding: 16px; }
+  .chat-bubble.user { margin-left: auto; background: #dff1ff; }
+  .chat-bubble.assistant { margin-right: auto; }
+  .chat-input-shell { max-width: 920px; margin: 0 auto; width: 100%; padding: 16px; display: flex; gap: 12px; }
+  .upload-shell { max-width: 920px; margin: 0 auto; }
+  .upload-box { padding: 20px; display: flex; gap: 12px; align-items: center; }
+  .error-text { color: #b42318; }
+  .empty-state, .typing-indicator { padding: 24px; text-align: center; color: #5f6b7a; }

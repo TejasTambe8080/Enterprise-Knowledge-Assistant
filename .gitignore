@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+dist/
+build/
+
+# App artifacts
+backend/rag.db
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/vector_db/*
+!backend/vector_db/.gitkeep
+backend/logs/*
+!backend/logs/.gitkeep
