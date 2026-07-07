@@ -11,6 +11,8 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const endRef = useRef(null);
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userInitial = (user?.name || user?.email || "U").charAt(0).toUpperCase();
 
   useEffect(() => {
     if (!localStorage.getItem("access_token")) {
@@ -45,18 +47,60 @@ export default function Chat() {
   }
 
   return (
-    <div className="chat-shell">
-      <header className="chat-header">
-        <h1>Enterprise RAG Assistant</h1>
+    <div className="chat-page">
+      <div className="app-shell">
+        <div className="floating-particle" />
+        <div className="floating-particle" />
+        <div className="floating-particle" />
+        <div className="floating-particle" />
+        <div className="floating-particle" />
+      </div>
+
+      <header className="chat-header glass-card chat-shell">
+        <div className="chat-brand">
+          <div className="logo-mark" style={{ width: 48, height: 48 }}>
+            <span style={{ fontSize: 24 }}>📚</span>
+          </div>
+          <div>
+            <h1 className="text-gradient">RAG Assistant</h1>
+            <div className="small-muted">Enterprise Knowledge Base</div>
+          </div>
+        </div>
+
         <div className="chat-actions">
-          <button onClick={() => navigate("/upload")}>Upload Documents</button>
-          <button onClick={handleLogout}>Logout</button>
+          <div className="user-avatar" title={user?.name || user?.email || "User"}>{userInitial}</div>
+          <button onClick={() => navigate("/upload")} className="btn-compact btn-success">
+            📤 Upload
+          </button>
+          <button onClick={handleLogout} className="btn-compact btn-danger">
+            🚪 Logout
+          </button>
         </div>
       </header>
+
       <main className="chat-main">
-        {messages.length === 0 ? <div className="empty-state">Ask me anything about your documents.</div> : null}
-        {messages.map((message, index) => <ChatWindow key={index} message={message} />)}
-        {loading ? <div className="typing-indicator">Thinking...</div> : null}
+        {messages.length === 0 ? (
+          <div className="chat-empty">
+            <div className="glass-card empty-card">
+              <div className="empty-icon">📚</div>
+              <h2 className="hero-heading text-gradient">Ask me anything about your documents!</h2>
+              <p className="small-muted">Upload a document to get started</p>
+            </div>
+          </div>
+        ) : (
+          <div className="chat-messages">
+            {messages.map((message, index) => <ChatWindow key={index} message={message} />)}
+          </div>
+        )}
+        {loading ? (
+          <div className="typing-indicator glass-card">
+            <div className="loading-dots" aria-label="Loading response">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        ) : null}
         <div ref={endRef} />
       </main>
       <ChatInput input={input} setInput={setInput} onSend={handleSendMessage} loading={loading} />
