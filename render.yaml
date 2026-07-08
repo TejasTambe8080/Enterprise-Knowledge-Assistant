@@ -33,7 +33,6 @@ services:
           name: rag-backend
           type: web
           property: url
-    # Corrected redirects for SPA routing
     redirects:
       - source: /*
         destination: /index.html
