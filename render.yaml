@@ -25,14 +25,17 @@ services:
   # Frontend Static Site
   - type: static
     name: rag-frontend
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
+    rootDir: frontend
     envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
       - key: VITE_API_URL
         fromService:
           name: rag-backend
           type: web
           property: url
+    buildCommand: npm install && npm run build
+    staticPublishPath: frontend/dist
     redirects:
       - source: /*
         destination: /index.html
